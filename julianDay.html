@@ -10,17 +10,18 @@
 <body>
 	<script>
     var leapYears = [2012, 2016, 2020];
-    var normalYears = [2013, 2014, 2015, 2017, 2018, 2019];
     var todaysDate = new Date();
+    // var todaysDate = new Date("September 2, 2012");
+    // alert(todaysDate);
     var year = todaysDate.getFullYear();
-    var month = todaysDate.getMonth();
-    var day = todaysDate.getDate();
-    var startOfYearms = Date.parse("January 1", year);
-    var todaysDatems = Date.parse(month, day, year);
-    var dayDiffms = todaysDatems - startOfYearms;
-    alert(dayDiffms);
-    var dayNumber = new Date(dayDiffms);
-    alert(dayNumber);
+    var dayDiffMsec = Date.parse(todaysDate) - Date.parse("January 1, $" + year);
+    var yearDayNumber = Number(dayDiffMsec) / 86400000;
+    if (leapYears.indexOf(year) == -1) {
+        alert('Today is Julian calendar day number: ' + Math.round(yearDayNumber + 0.5));
+    }
+    else {
+        alert('Today is Julian calendar day number: ' + Math.round(yearDayNumber + 1.5));
+    }
     </script>
 </body>
 

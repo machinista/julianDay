@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<title>Julian Day</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+</head>
+
+<body>
+	<script>
+    var leapYears = [2012, 2016, 2020];
+    var normalYears = [2013, 2014, 2015, 2017, 2018, 2019];
+    var todaysDate = new Date();
+    var year = todaysDate.getFullYear();
+    var month = todaysDate.getMonth();
+    var day = todaysDate.getDate();
+    var startOfYearms = Date.parse("January 1", year);
+    var todaysDatems = Date.parse(month, day, year);
+    var dayDiffms = todaysDatems - startOfYearms;
+    alert(dayDiffms);
+    var dayNumber = new Date(dayDiffms);
+    alert(dayNumber);
+    </script>
+</body>
+
+</html>

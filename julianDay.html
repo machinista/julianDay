@@ -31,13 +31,12 @@
     <script>
     var leapYears = [2012, 2016, 2020];
     var todaysDate = new Date();
-    console.log(todaysDate)
     var year = todaysDate.getFullYear();
     var hours = todaysDate.getHours();
     var hoursAsStr = hours.toString();
     var minutes = todaysDate.getMinutes();
     var minutesAsStr = minutes.toString();
-    var dayDiffMsec = Date.parse(todaysDate) - Date.parse("January 1, $" + year);
+    var dayDiffMsec = Date.parse(todaysDate) - Date.parse(year + "-01-01");
     var yearDay = Math.round((Number(dayDiffMsec) / 86400000) + 0.5);
     var leapYearDay = Math.round((Number(dayDiffMsec) / 86400000) + 1.5);
 
@@ -53,6 +52,7 @@
         document.getElementById("julianDay").innerHTML = yearDay;
         document.getElementById("sampleEasCode").innerHTML = "ZCZC-WXR-BZW-036000+0005-" + yearDay + hoursAsStr + minutesAsStr + "-AMINO–";
     }
+    
     else {
         document.getElementById("julianDay").innerHTML = leapYearDay;
         document.getElementById("sampleEasCode").innerHTML = "ZCZC-WXR-BZW-036000+0005-" + leapYearDay + hours + minutes + "-AMINO–";

@@ -29,7 +29,6 @@
     <div id="sampleEasCode"></div>
 
     <script>
-    var leapYears = [2012, 2016, 2020];
     var todaysDate = new Date();
     var year = todaysDate.getFullYear();
     var hours = todaysDate.getHours();
@@ -38,7 +37,6 @@
     var minutesAsStr = minutes.toString();
     var dayDiffMsec = Date.parse(todaysDate) - Date.parse(year + "-01-01");
     var yearDay = Math.round((Number(dayDiffMsec) / 86400000) + 0.5);
-    var leapYearDay = Math.round((Number(dayDiffMsec) / 86400000) + 1.5);
 
     if (hoursAsStr.length == 1) {
         hoursAsStr = '0' + hoursAsStr;
@@ -48,15 +46,8 @@
         minutesAsStr = "0" + minutesAsStr
     }
 
-    if (leapYears.indexOf(year) == -1) {
-        document.getElementById("julianDay").innerHTML = yearDay;
-        document.getElementById("sampleEasCode").innerHTML = "ZCZC-WXR-BZW-036000+0005-" + yearDay + hoursAsStr + minutesAsStr + "-AMINO–";
-    }
-    
-    else {
-        document.getElementById("julianDay").innerHTML = leapYearDay;
-        document.getElementById("sampleEasCode").innerHTML = "ZCZC-WXR-BZW-036000+0005-" + leapYearDay + hours + minutes + "-AMINO–";
-    }
+    document.getElementById("julianDay").innerHTML = yearDay;
+    document.getElementById("sampleEasCode").innerHTML = "ZCZC-WXR-BZW-036000+0005-" + yearDay + hoursAsStr + minutesAsStr + "-AMINO–";
     </script>
 </body>
 </html>

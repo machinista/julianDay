@@ -1,23 +1,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-
 <head>
     <title>Julian Day</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-    <style>
 
+    <style>
     #julianDay {
         display:inline;
         font-weight: bold;
         color: red;
     }
+
     #sampleEasCode {
         display:inline;
         font-weight: bold;
         color: black;
     }
-</style>
+    </style>
 </head>
 
 <body>
@@ -31,21 +31,31 @@
     <script>
     var leapYears = [2012, 2016, 2020];
     var todaysDate = new Date();
-    //var todaysDate = new Date("September 2, 2012");
+    console.log(todaysDate)
     var year = todaysDate.getFullYear();
     var hours = todaysDate.getHours();
+    var hoursAsStr = hours.toString();
     var minutes = todaysDate.getMinutes();
+    var minutesAsStr = minutes.toString();
     var dayDiffMsec = Date.parse(todaysDate) - Date.parse("January 1, $" + year);
     var yearDay = Math.round((Number(dayDiffMsec) / 86400000) + 0.5);
     var leapYearDay = Math.round((Number(dayDiffMsec) / 86400000) + 1.5);
 
+    if (hoursAsStr.length == 1) {
+        hoursAsStr = '0' + hoursAsStr;
+    }
+
+    if (minutesAsStr.length == 1) {
+        minutesAsStr = "0" + minutesAsStr
+    }
+
     if (leapYears.indexOf(year) == -1) {
         document.getElementById("julianDay").innerHTML = yearDay;
-        document.getElementById("sampleEasCode").innerHTML = "ZCZC-WXR-BZW-036000+0005-" + yearDay + hours + minutes + "-AMINO–"
+        document.getElementById("sampleEasCode").innerHTML = "ZCZC-WXR-BZW-036000+0005-" + yearDay + hoursAsStr + minutesAsStr + "-AMINO–";
     }
     else {
         document.getElementById("julianDay").innerHTML = leapYearDay;
-        document.getElementById("sampleEasCode").innerHTML = "ZCZC-WXR-BZW-036000+0005-" + leapYearDay + hours + minutes + "-AMINO–"
+        document.getElementById("sampleEasCode").innerHTML = "ZCZC-WXR-BZW-036000+0005-" + leapYearDay + hours + minutes + "-AMINO–";
     }
     </script>
 </body>

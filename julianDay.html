@@ -1,53 +1,84 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <title>Julian Day</title>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-
-    <style>
-    #julianDay {
-        display:inline;
-        font-weight: bold;
-        color: red;
-    }
-
-    #sampleEasCode {
-        display:inline;
-        font-weight: bold;
-        color: black;
-    }
-    </style>
-</head>
-
-<body>
-    <h1>EAS Test Codes</h1>
-    Counting from January 1st, today is day number:
-    <div id="julianDay"></div>
-    <p></p>
-    Example EAS code based on current date and time:
-    <div id="sampleEasCode"></div>
-
-    <script>
-    var todaysDate = new Date();
-    var year = todaysDate.getFullYear();
-    var hours = todaysDate.getHours();
-    var hoursAsStr = hours.toString();
-    var minutes = todaysDate.getMinutes();
-    var minutesAsStr = minutes.toString();
-    var dayDiffMsec = Date.parse(todaysDate) - Date.parse(year + "-01-01");
-    var yearDay = Math.round((Number(dayDiffMsec) / 86400000) + 0.5);
-
-    if (hoursAsStr.length == 1) {
-        hoursAsStr = '0' + hoursAsStr;
-    }
-
-    if (minutesAsStr.length == 1) {
-        minutesAsStr = "0" + minutesAsStr
-    }
-
-    document.getElementById("julianDay").innerHTML = yearDay;
-    document.getElementById("sampleEasCode").innerHTML = "ZCZC-WXR-BZW-036000+0005-" + yearDay + hoursAsStr + minutesAsStr + "-AMINO–";
-    </script>
-</body>
+    <head>
+        <title>Julian Day</title>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <style>
+        #julianDay {
+            display:inline;
+            font-weight: bold;
+            color: blue;
+            border: black solid 1px;
+            padding: 3px;
+        }
+        #sampleEasCode {
+            display:inline;
+            font-weight: bold;
+            color: black;
+        }
+        #dayOfYearButton {
+            background-color: lightGreen;
+        }
+        #copyButton {
+            background-color: lightBlue;
+        }
+        button {
+            padding: 3px;
+        }
+        footer {
+            position: absolute;
+            top: 300px;
+            font-size: 10px;
+            color: red;
+        }
+        </style>
+    </head>
+    <body>
+        <body onload="dayOfTheYear()">
+        <h1>EAS Test Code</h1>
+        Counting from January 1st, today is day number:
+        <div id="julianDay"></div>
+        <p></p>
+        Example EAS code based on current date and time:
+        <div id="sampleEasCode"></div>
+        <p></p>
+        <button id="dayOfYearButton">Re-generate code</button>
+        <button id="copyButton">Copy EAS code</button>
+        <footer>
+            <strong>Note</strong>: this page does not work with Iceweasel v3.5.16
+        </footer>
+        <script>
+            function copyCode() {
+                var easCode = document.getElementById('sampleEasCode').innerHTML
+                prompt("Use 'Ctrl+C', then 'Enter' to copy this code to clipboard", easCode);
+            }
+            function dayOfTheYear() {
+                var todaysDate = new Date();
+                var year = todaysDate.getFullYear();
+                var hours = todaysDate.getHours();
+                var hoursAsStr = hours.toString();
+                var minutes = todaysDate.getMinutes();
+                var minutesAsStr = minutes.toString();
+                var dayDiffMsec = Date.parse(todaysDate) - Date.parse(year + "-01-01");
+                var yearDay = Math.round((Number(dayDiffMsec) / 86400000) + 0.5);
+                var yearDayAsStr = yearDay.toString();
+                if (minutesAsStr.length == 1) {
+                minutesAsStr = "0" + minutesAsStr;
+                }
+                if (hoursAsStr.length == 1) {
+                    hoursAsStr = '0' + hoursAsStr;
+                }
+                if (yearDayAsStr.length == 1) {
+                    yearDayAsStr = "00" + yearDayAsStr;
+                } else if (yearDayAsStr.length == 2) {
+                    yearDayAsStr = "0" + yearDayAsStr;
+                }
+                document.getElementById("julianDay").innerHTML = yearDay;
+                document.getElementById("sampleEasCode").innerHTML = "ZCZC-WXR-BZW-036000+0005-" + yearDayAsStr + hoursAsStr + minutesAsStr + "-AMINO–";
+            }
+            dayOfYearButton.onclick = dayOfTheYear;
+            copyButton.onclick = copyCode;
+        </script>
+    </body>
 </html>
